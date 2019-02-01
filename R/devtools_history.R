@@ -13,6 +13,7 @@ usethis::use_package("expm")
 usethis::use_package("CompQuadForm")
 usethis::use_package("DEoptim")
 
-
-
+# data (read data before)
+#usethis::use_data(csm, overwrite = TRUE)
+#usethis::use_data(energy, overwrite = TRUE)
 
