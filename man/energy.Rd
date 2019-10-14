@@ -15,7 +15,7 @@
   \item{hour.num}{hour (numerical)}
 }}
 \source{
-\url{https://iles-ponant-edf-sei.opendatasoft.com}, \url{www.infoclimat.fr}
+\url{https://iles-ponant-edf-sei.opendatasoft.com}, \url{https://www.infoclimat.fr}
 }
 \usage{
 energy

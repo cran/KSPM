@@ -10,7 +10,6 @@
 #' @param object an object of class "kspm", usually, a result of a call to \code{kspm}.
 #' @param kernel.test vector of characters indicating for which kernel a test should be performed. Default is \code{"all"}. If \code{"none"}, no test will be performed.
 #' @param global.test logical, if \code{TRUE}, a global test for kernel part is computed.
-#' @param control.test error bound for Davies' method, corresponding to \code{acc} parameter in \link[CompQuadForm]{davies} function.
 #' @param ... further arguments passed to or from other methods.
 #'
 #' @details the description of the model, including coefficients for the linear part and if asked for, test(s) of variance components associated with kernel part.
@@ -58,7 +57,7 @@
 
 
 
-summary.kspm <- function(object, kernel.test = "all", global.test = FALSE, control.test = 1e-07, ...) {
+summary.kspm <- function(object, kernel.test = "all", global.test = FALSE, ...) {
 
   ################################################################################
   # CALL
@@ -115,23 +114,30 @@ summary.kspm <- function(object, kernel.test = "all", global.test = FALSE, contr
       if (length(object$lambda) == 1) {
         kernel.test <- names(object$lambda)
         tau <- (object$sigma ^ 2) / object$lambda
-        pTau <- test.1.kernel(object, control.test = control.test)
+        res_test1 <- test.1.kernel(object)
+        pTau <- res_test1$p.value
         lambda <- object$lambda
+        daviesParameters <- list(Ker1 = list(q = res_test1$q, pev = res_test1$pev))
       }
       # Test for model with 2 kernels and more
       if (length(object$lambda) > 1) {
         tau <- c()
         pTau <- c()
         lambda <- c()
+        daviesParameters <- list()
         # If user did not indicate which kernel should be tested, all are tested
         if ("all" %in% kernel.test) {
           kernel.test <- names(object$lambda)
         }
         for (k in 1:length(kernel.test)) {
           tau[k] <- (object$sigma ^ 2) / object$lambda[kernel.test[k]]
-          pTau[k] <- test.k.kernel(object, kernel.test[k], control.test = control.test)
+          res_testk <- test.k.kernel(object, kernel.test[k])
+          pTau[k] <- res_testk$p.value
           lambda[k] <- object$lambda[kernel.test[k]]
+          daviesParameters[[k]] <- list(q = res_testk$q, pev = res_testk$pev)
+
         }
+        names(daviesParameters) <- kernel.test
       }
       # Table
       resKernel <- matrix(cbind(lambda, tau, pTau), nrow = length(kernel.test))
@@ -139,17 +145,23 @@ summary.kspm <- function(object, kernel.test = "all", global.test = FALSE, contr
       rownames(resKernel) <- kernel.test
     } else {# If user indicated none, no test for kernel is displayed
       resKernel <- NULL
+      daviesParameters <- NULL
     }
 
     # Global test
     if (global.test) {
-      pGlobal <- test.global.kernel(object, control.test = control.test)
+      res_test_global <- test.global.kernel(object)
+      pGlobal <- res_test_global$p.value
+      daviesParametersGlobal <- list(q = res_test_global$q, pev = res_test_global$pev)
     } else {
       pGlobal <- NULL
+      daviesParametersGlobal <- NULL
     }
   } else {
     resKernel <- NULL
     pGlobal <- NULL
+    daviesParameters <- NULL
+    daviesParametersGlobal <- NULL
   }
 
   ################################################################################
@@ -165,7 +177,7 @@ summary.kspm <- function(object, kernel.test = "all", global.test = FALSE, contr
   # OUT
   ################################################################################
 
-  out <- list(call = call, residuals = object$residuals, coefficients = coefficients, sigma = object$sigma, edf = object$edf, R2 = R2, R2adj = R2adj, score.test = resKernel, global.p.value = pGlobal, sample.size = list(all = n.total, inc = n))
+  out <- list(call = call, residuals = object$residuals, coefficients = coefficients, sigma = object$sigma, edf = object$edf, R2 = R2, R2adj = R2adj, score.test = resKernel, global.p.value = pGlobal, sample.size = list(all = n.total, inc = n), daviesInfo = daviesParameters, daviesInfoGlobal = daviesParametersGlobal)
   class(out) <- c("summary.kspm")
   return(out)
 }

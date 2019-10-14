@@ -7,16 +7,14 @@
 \alias{test.k.kernel}
 \title{Score Tests for kernel part in kernel semi parametric model}
 \usage{
-test.1.kernel(object, control.test)
+test.1.kernel(object)
 
-test.global.kernel(object, control.test)
+test.global.kernel(object)
 
-test.k.kernel(object, kernel.name, control.test)
+test.k.kernel(object, kernel.name)
 }
 \arguments{
 \item{object}{an object of class "kspm"}
-
-\item{control.test}{the acc argument provided in davies() function}
 
 \item{kernel.name}{vector of character listing names of kernels for which test should be performed}
 }

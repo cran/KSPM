@@ -26,13 +26,15 @@
 #' @importFrom stats deviance
 #'
 #' @rdname deviance.kspm
+#'
 #' @export deviance.kspm
+#'
 #' @export
 
 
 deviance.kspm <- function(object, ...)
 {
-  # Compute the Residual Sum of Squares
+  # Compute the Residual Sum of Squares (RSS)
   RSS <- (t(object$residuals) %*% (object$residuals))[1, 1]
   # Deviance is the RSS in Gaussian family models
   cat("RSS")

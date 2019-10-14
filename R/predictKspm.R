@@ -10,7 +10,7 @@
 #' @param level confidence level. Default is \code{level = 0.95} meaning 95\% confidence/prediction interval.
 #' @param ... further arguments passed to or from other methods.
 #'
-#' @details \code{predict.kspm} produces predicted values. If a new dataset is not specified, it will return the fitted values from the original data. If \code{predict.kspm} is applied to a new dataset, all variables used in the original model should be provided in  \code{newdata.linear} and \code{newdata.kernel} arguments. Setting \code{interval} specifies computation of confidence or prediction intervals at the specified \code{level}.
+#' @details \code{predict.kspm} produces predicted values. If a new dataset is not specified, it will return the fitted values from the original data (complete data used in the model specification). If \code{predict.kspm} is applied to a new dataset, all variables used in the original model should be provided in  \code{newdata.linear} and \code{newdata.kernel} arguments but only complete data may be provided. Setting \code{interval} specifies computation of confidence or prediction intervals at the specified \code{level}.
 #'
 #'
 #' @return \code{predict.kspm} returns a vector of predictions or a matrix containing the following components if \code{interval} is set:

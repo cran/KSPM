@@ -30,7 +30,7 @@
 predict method for class "kspm".
 }
 \details{
-\code{predict.kspm} produces predicted values. If a new dataset is not specified, it will return the fitted values from the original data. If \code{predict.kspm} is applied to a new dataset, all variables used in the original model should be provided in  \code{newdata.linear} and \code{newdata.kernel} arguments. Setting \code{interval} specifies computation of confidence or prediction intervals at the specified \code{level}.
+\code{predict.kspm} produces predicted values. If a new dataset is not specified, it will return the fitted values from the original data (complete data used in the model specification). If \code{predict.kspm} is applied to a new dataset, all variables used in the original model should be provided in  \code{newdata.linear} and \code{newdata.kernel} arguments but only complete data may be provided. Setting \code{interval} specifies computation of confidence or prediction intervals at the specified \code{level}.
 }
 \examples{
 x <- 1:15

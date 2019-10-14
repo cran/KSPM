@@ -9,7 +9,6 @@
 #' @aliases test.k.kernel
 #'
 #' @param object an object of class "kspm"
-#' @param control.test the acc argument provided in davies() function
 #' @param kernel.name vector of character listing names of kernels for which test should be performed
 #'
 #'
@@ -41,7 +40,7 @@
 # TEST OF KERNEL IN SINGLE KSPM
 ################################################################################
 
-test.1.kernel <- function(object, control.test)
+test.1.kernel <- function(object)
 {
 
   #-------------------------------------------------------------------------------
@@ -84,10 +83,17 @@ test.1.kernel <- function(object, control.test)
     q <- as.numeric(res %*% K %*% res / s2)
     SKS <- S %*% K %*% S - q * S
     ee <- eigen(SKS, symmetric = T, only.values = TRUE)
-    p.value <- davies(0, lambda = ee$values[abs(ee$values) >= 1e-10], acc = control.test)$Qq
+    pev <- ee$values[abs(ee$values) >= 1e-10]
+    davies_res <- davies(q, lambda = pev)
+    k_lim <- 1
+    while (davies_res$ifault == 1 & k_lim <= 5) {
+      k_lim <- k_lim + 1
+      davies_res <- davies(q, lambda = pev, lim = 10000*k_lim)
+    }
+    p.value <- davies_res$Qq
   }
 
-  return(p.value)
+  return(list(q = q, pev = pev, p.value = p.value))
 }
 
 ################################################################################
@@ -96,7 +102,7 @@ test.1.kernel <- function(object, control.test)
 
 #' @rdname test.function
 #' @export
-test.global.kernel <- function(object, control.test)
+test.global.kernel <- function(object)
 {
 
   #-------------------------------------------------------------------------------
@@ -139,10 +145,17 @@ test.global.kernel <- function(object, control.test)
     q <- as.numeric(res %*% K %*% res / s2)
     SKS <- S %*% K %*% S - q * S
     ee <- eigen(SKS, symmetric = T, only.values = TRUE)
-    p.value <- davies(0, lambda = ee$values[abs(ee$values) >= 1e-10], acc = control.test)$Qq
+    pev <- ee$values[abs(ee$values) >= 1e-10] # positive eigen values
+    davies_res <- davies(q, lambda = pev)
+    k_lim <- 1
+    while (davies_res$ifault == 1 & k_lim <= 5) {
+      k_lim <- k_lim + 1
+      davies_res <- davies(q, lambda = pev, lim = 10000*k_lim)
+    }
+    p.value <- davies_res$Qq
   }
 
-  return(p.value)
+  return(list(q = q, pev = pev, p.value = p.value))
 }
 
 
@@ -153,7 +166,7 @@ test.global.kernel <- function(object, control.test)
 
 #' @rdname test.function
 #' @export
-test.k.kernel <- function(object, kernel.name, control.test)
+test.k.kernel <- function(object, kernel.name)
 {
 
   #-------------------------------------------------------------------------------
@@ -221,7 +234,13 @@ test.k.kernel <- function(object, kernel.name, control.test)
   # distribution under H0
   P0.sqrt <- sqrtm(P0) # root square of the matrix
   ee <- eigen((1 / 2) * t(P0.sqrt) %*% K.H1 %*% P0.sqrt,  only.values = TRUE)
-  p.value <- davies(q, lambda = ee$values[abs(ee$values) >= 1e-10], acc = control.test)$Qq
-
-  return(p.value)
+  pev <- ee$values[abs(ee$values) >= 1e-10]
+  davies_res <- davies(q, lambda = pev)
+  k_lim <- 1
+  while (davies_res$ifault == 1 & k_lim <= 5) {
+    k_lim <- k_lim + 1
+    davies_res <- davies(q, lambda = pev, lim = 10000*k_lim)
+  }
+  p.value <- davies_res$Qq
+  return(list(q = q, pev = pev, p.value = p.value))
 }

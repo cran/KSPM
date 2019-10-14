@@ -12,6 +12,6 @@
 #'   \item{hour}{hour (categorical)}
 #'   \item{hour.num}{hour (numerical)}
 #' }
-#' @source \url{https://iles-ponant-edf-sei.opendatasoft.com}, \url{www.infoclimat.fr}
+#' @source \url{https://iles-ponant-edf-sei.opendatasoft.com}, \url{https://www.infoclimat.fr}
 #'
 "energy"
