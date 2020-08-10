@@ -1,5 +1,5 @@
-18f356252e531f613abc6a23ff0406e0 *DESCRIPTION
-a494d9ba2918ff4a6c23459e7ef4d957 *NAMESPACE
+2b76b3cef41f2a40a8f3eeabc9c5fdf5 *DESCRIPTION
+c78a57bf59af409179398ef31cdc60d6 *NAMESPACE
 9a1eb0c275a887551a6a3628162ef5b3 *R/Kernel.R
 fe60deb036ef1bffd0184f54591d6440 *R/caseNamesKspm.R
 4e24b4ae405e3cf031f2e944cfac0081 *R/coefKspm.R
@@ -8,11 +8,12 @@ e5347f29537ee244f891551dcaf94a4b *R/confintKspm.R
 2c8d1ea0ae5772f35c8352c935e44fa8 *R/csm.R
 3ea90522f6de5f2bdd74048a26f54636 *R/derivatives.R
 e6281a5591cf67231ce2ee09da205bc6 *R/devianceKspm.R
-eef9aa1c30f825101c932be677274d07 *R/energy.R
+63b57ecb3ce240f023ca12301aa1e3c7 *R/energy.R
 9b1956ce78d7ed514f7492bf9d4a5eff *R/extractAICkspm.R
 7bb6fbadef4a2e25b11bfaa29956db83 *R/fittedKspm.R
 1247b89613e2344d070543c1f27a241c *R/flexibleSummary.R
 04131a54f1f07f7b284c35a8b70e13ba *R/getParameters.R
+21b696e9dece6e3f31bfd31d5a6e8f9a *R/hypercoefKspm.R
 c3a92bd7f7a3cc00d8e53d6dd16f052a *R/infoKspm.R
 6bf07d858ec8ae01cd34799830e16a42 *R/kernelFunctions.R
 7ab911cb52d2380ff28150fa1b5af38b *R/kernelList.R
@@ -37,10 +38,10 @@ ab94639ff54f0608d8a6d779872f3519 *R/summaryKspm.R
 637891efd89509666633a2d79b2de2cc *R/variableNamesKspm.R
 31ce4d7c6f9583dc974023b7759e2340 *build/vignette.rds
 71f64b5e47c062040e1c3c4ec67dea3d *data/csm.rda
-adccc38a9f7a2d8e5563eea3933b501f *data/energy.rda
-72c6eff7ad789bec7bd9c2a728d3db43 *inst/doc/vignetteKSPM.R
-3f3dc925ba969d4400bbd8b0489c3daa *inst/doc/vignetteKSPM.Rmd
-12bdf4a8b15124ea5f697019fac0c4b2 *inst/doc/vignetteKSPM.html
+01a59f05f784f2720e891b07178338e0 *data/energy.rda
+6dfb83c9420c47f6488df9dbdc31c57e *inst/doc/vignetteKSPM.R
+2ec2c9c9cdab8788c16d6de2f4d665bd *inst/doc/vignetteKSPM.Rmd
+a9ad393450346c282f5db34aba574819 *inst/doc/vignetteKSPM.html
 ab3bcd7cd9de52538aa2fcde31d03ca5 *man/Kernel.Rd
 59398db3391fc24cbae057060f64419e *man/case.names.kspm.Rd
 96b1d1968154f79443b96e2f5823733e *man/coef.kspm.Rd
@@ -49,11 +50,12 @@ ab3bcd7cd9de52538aa2fcde31d03ca5 *man/Kernel.Rd
 1320245ec97d8895d9b690f22d27cfd2 *man/csm.Rd
 2b436018158a4420410f1b07618f2fa9 *man/derivatives.Rd
 7bcdc951d5ef63b63edd9d0b4dddb4b9 *man/deviance.kspm.Rd
-511503b5e7af56630bda84a43faab9fa *man/energy.Rd
+c89b72a1bee369a40cef5a09f2d67a36 *man/energy.Rd
 4a019e28365755d1f23c05973ea09b70 *man/extractAIC.kspm.Rd
 2351a5663d42e3e4be7da4fd1cb62457 *man/fitted.kspm.Rd
 701f6a698c65dd16f6de0f0ca301fd61 *man/flexible.summary.Rd
 a6281470b6dbff2e7f37febfbaabbd7e *man/get.parameters.Rd
+e3754a748f3c3db87e8a570577261306 *man/hypercoef.Rd
 680cf45eef760014fac2483ba5e0d8cd *man/info.kspm.Rd
 fe8c6be141d4aabc2ecf19934b01b3cb *man/kernel.function.Rd
 1656c3f9e46d8be674e947ec38cdaab1 *man/kernel.list.Rd
@@ -76,4 +78,4 @@ bbef93034b5b1a4499652c3a314f5ed3 *man/sigma.kspm.Rd
 6df316df943ac56673c8c6df9c70def2 *man/summary.kspm.Rd
 92a97d5e77159a8a061aa01335c76b83 *man/test.function.Rd
 d4402f909dd97743818d95ec74c2698c *man/variable.names.kspm.Rd
-3f3dc925ba969d4400bbd8b0489c3daa *vignettes/vignetteKSPM.Rmd
+2ec2c9c9cdab8788c16d6de2f4d665bd *vignettes/vignetteKSPM.Rmd

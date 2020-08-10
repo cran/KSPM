@@ -17,8 +17,9 @@ text-align: justify}
 </style>
 
 ```{r setup, include = FALSE}
-# Sys.setenv(hydat_eval = TRUE)
-LOCAL <- nzchar(Sys.getenv("hydat_eval"))
+# Sys.setenv(hydat_eval = "local")
+variablelocal <- Sys.getenv("hydat_eval")
+LOCAL <- variablelocal == "local"
 print(LOCAL)
 ```
 
@@ -338,8 +339,7 @@ We assume a single kernel semi-parametric model with a gaussian kernel function.
 
 ```{r, eval = FALSE}
 # NOT RUN
-# limitCores option should be chosen dependently of computer characteristics. see ?detectCores function
-csm.fit4 <- kspm(response = "Ratings", linear = NULL, kernel = ~Kernel(~ Sentiment + Views + Likes + Dislikes + Comments + Aggregate.Followers, kernel.function = "gaussian"), data = csm, level = 0, control = kspmControl(parallel = TRUE, limitCores = 5))
+csm.fit4 <- kspm(response = "Ratings", linear = NULL, kernel = ~Kernel(~ Sentiment + Views + Likes + Dislikes + Comments + Aggregate.Followers, kernel.function = "gaussian"), data = csm, level = 0, control = kspmControl(parallel = TRUE))
 ```
 
 
@@ -387,7 +387,6 @@ axis(1, at = c(1, 7, 13, 19, 25), labels = c("0h00", "6h00", "12h00", "18h00", "
 legend("topleft", col = c("darkgreen", "blue", "red"), legend = c("Sep 13, 2015", "Sep 14, 2015", "Sep 15, 2015"), lwd = 2, pch = c(1, 0, 17))
 abline(v = 24.9, lty = 2)
 text(25.5, 730, "next day", adj = 0)
-text(25.5, 350, "next day", adj = 0)
 ```
 
 
@@ -403,11 +402,11 @@ energy_test_ <- energy[409:504, ]
 ## A first model
 
 
-We fit a single kernel semi-parametric model to the training data. We assumed that energy depends linearly on temperature (T), and therefore this variable is included in the linear part of the model. The other meteorologic data as well as hours in 24-hour numeric format are included in the kernel part of the model. We used a gaussian kernel.
+We fit a single kernel semi-parametric model to the training data. We assumed that energy depends linearly on temperature, and therefore this variable is included in the linear part of the model. The other meteorologic data as well as hours in 24-hour numeric format are included in the kernel part of the model. We used a gaussian kernel.
 
 
 ```{r, eval=LOCAL}
-energy.fit1 <- kspm(response = "power", linear = ~T, kernel = ~Kernel(~hour.num + P + HR, kernel.function = "gaussian", rho = 0.7) , data = energy_train_)
+energy.fit1 <- kspm(response = "power", linear = ~Temperature, kernel = ~Kernel(~hour.num + P + HR, kernel.function = "gaussian", rho = 0.7) , data = energy_train_)
 ```
 
 
@@ -426,8 +425,8 @@ Other values were chosen ten fold smaller and larger than the estimated value of
 
 
 ```{r, eval=LOCAL}
-energy.fit2 <- kspm(response = "power", linear = ~T, kernel = ~Kernel(~hour.num + P + HR, kernel.function = "gaussian", rho = 0.07) , data = energy_train_, level = 0)
-energy.fit3 <- kspm(response = "power", linear = ~T, kernel = ~Kernel(~hour.num + P + HR, kernel.function = "gaussian", rho = 7) , data = energy_train_, level = 0)
+energy.fit2 <- kspm(response = "power", linear = ~Temperature, kernel = ~Kernel(~hour.num + P + HR, kernel.function = "gaussian", rho = 0.07) , data = energy_train_, level = 0)
+energy.fit3 <- kspm(response = "power", linear = ~Temperature, kernel = ~Kernel(~hour.num + P + HR, kernel.function = "gaussian", rho = 7) , data = energy_train_, level = 0)
 ```
 
 

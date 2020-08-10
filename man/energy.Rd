@@ -8,7 +8,7 @@
 \describe{
   \item{power}{energy consumption}
   \item{date}{date}
-  \item{T}{temperature}
+  \item{Temperature}{temperature}
   \item{P}{pression}
   \item{HR}{humidity rate}
   \item{hour}{hour (categorical)}
